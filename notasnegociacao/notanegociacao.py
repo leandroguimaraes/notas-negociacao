@@ -30,7 +30,9 @@ class NotaNegociacao:
         nNegocios = 0
         isOpcao = False
         lines = text.splitlines()
-        for i in range(len(lines)):
+
+        i = 0
+        while (i < len(lines)):
             if (lines[i] == 'Nr. nota'):
                 nNegocios = 0
 
@@ -266,5 +268,7 @@ class NotaNegociacao:
                 i += 1
                 if (lines[i] == 'D'):
                     nota.resumoFinanceiro.custosOperacionais.liquidoParaDataValor *= -1
+
+            i += 1
 
         return notas
