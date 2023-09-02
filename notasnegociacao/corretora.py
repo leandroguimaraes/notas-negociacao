@@ -19,9 +19,14 @@ class Corretora:
 
         notas_pdf = [f for f in os.listdir(dir) if f.endswith('.pdf')]
 
+        pdfCount = 1
         output_buffer = io.StringIO()
         for pdf in notas_pdf:
             with open(dir + pdf, "rb") as pdf_file:
+                print(f'Processando PDFs: {pdfCount}/{len(notas_pdf)}')
+                print(pdf)
+                pdfCount += 1
+
                 extract_text_to_fp(pdf_file, output_buffer,
                                    laparams=LAParams())
                 text = output_buffer.getvalue()
