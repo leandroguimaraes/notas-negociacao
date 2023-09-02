@@ -220,8 +220,8 @@ class NotaNegociacao:
                 nota.resumoFinanceiro.custosOperacionais.liquidoParaDataValor = strToFloat(
                     lines[i])
 
-            if ('Capitais e regiões' in lines[i]):
-                i += 2
+            if (lines[i] == 'C' or lines[i] == 'D'):
+                print(f'line: {i}')
                 if (lines[i] == 'D'):
                     nota.resumoFinanceiro.clearing.valorLiquidoOperacoes *= -1
 
