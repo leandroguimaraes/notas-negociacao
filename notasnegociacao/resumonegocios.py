@@ -1,0 +1,9 @@
+class ResumoNegocios:
+    debentures: float
+    vendasVista: float
+    comprasVista: float
+    opcoesCompras: float
+    opcoesVendas: float
+    operacoesTermo: float
+    valorOperacoesTitulosPublicosVNom: float
+    valorOperacoes: float

@@ -1,0 +1,11 @@
+class NegocioRealizado:
+    folha: int
+    negociacao: str
+    compraVenda: str
+    tipoMercado: str
+    prazo: str
+    especificacaoTitulo: str
+    quantidade: int
+    precoAjuste: float
+    valorOperacaoAjuste: float
+    debitoCredito: str
