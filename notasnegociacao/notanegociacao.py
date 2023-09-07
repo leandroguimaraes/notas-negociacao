@@ -72,10 +72,10 @@ class NotaNegociacao:
         n.debitoCredito = line[-1:]
         line = line[:-2]
 
-        n.valorOperacaoAjuste = line[line.rfind(' ') + 1:]
+        n.valorOperacaoAjuste = strToFloat(line[line.rfind(' ') + 1:])
         line = line[:line.rfind(' ')]
 
-        n.precoAjuste = line[line.rfind(' ') + 1:]
+        n.precoAjuste = strToFloat(line[line.rfind(' ') + 1:])
         line = line[:line.rfind(' ')]
 
         n.quantidade = line[line.rfind(' ') + 1:]
