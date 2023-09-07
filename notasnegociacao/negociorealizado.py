@@ -5,6 +5,7 @@ class NegocioRealizado:
     tipoMercado: str
     prazo: str
     especificacaoTitulo: str
+    obs: str
     quantidade: int
     precoAjuste: float
     valorOperacaoAjuste: float
