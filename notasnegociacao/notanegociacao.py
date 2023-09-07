@@ -2,7 +2,7 @@
 from notasnegociacao.negociorealizado import NegocioRealizado
 from notasnegociacao.resumofinanceiro import ResumoFinanceiro
 from notasnegociacao.resumonegocios import ResumoNegocios
-from notasnegociacao.util import strToFloat
+from notasnegociacao.util import strToFloat, strToInt
 from typing import List
 import datetime
 
@@ -33,7 +33,7 @@ class NotaNegociacao:
             if ('Nr. nota' in lines[i]):
                 i += 1
                 line = lines[i].split()
-                folhaAtual = line[1]
+                folhaAtual = strToInt(line[1])
 
                 nota = next(
                     (nota for nota in notas if nota.numero == line[0]), None)
@@ -78,7 +78,7 @@ class NotaNegociacao:
         n.precoAjuste = strToFloat(line[line.rfind(' ') + 1:])
         line = line[:line.rfind(' ')]
 
-        n.quantidade = line[line.rfind(' ') + 1:]
+        n.quantidade = strToInt(line[line.rfind(' ') + 1:])
         line = line[:line.rfind(' ')]
 
         if (line[-2:-1] == ' '):
