@@ -49,7 +49,7 @@ class NotaNegociacao:
                 i += 2
 
                 while ('Resumo dos Negócios' not in lines[i]):
-                    notas.append(NotaNegociacao.getNegocioInfo(
+                    nota.negociosRealizados.append(NotaNegociacao.getNegocioInfo(
                         lines[i], folhaAtual))
 
                     i += 1
