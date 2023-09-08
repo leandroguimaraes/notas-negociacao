@@ -201,7 +201,23 @@ class NotaNegociacao:
 
                 nota.resumoFinanceiro.custosOperacionais.irrfSOperacoes *= -1
 
-            if ('Outros' in lines[i]):
+            if ('IRRF Day Trade' in lines[i]):
+                lines[i] = lines[i][lines[i].find('R$') + 3:]
+                nota.resumoFinanceiro.custosOperacionais.irrfDayTradeBase = strToFloat(
+                    lines[i][:lines[i].find(' ')]) * -1
+
+                lines[i] = lines[i][lines[i].find('R$') + 3:]
+                nota.resumoFinanceiro.custosOperacionais.irrfDayTradeProjecao = strToFloat(
+                    lines[i][:lines[i].find(' ')]) * -1
+
+                lines[i] = lines[i][lines[i].find(' ') + 1:]
+                lineInfo = lines[i].split()
+                nota.resumoFinanceiro.custosOperacionais.outros = strToFloat(
+                    lineInfo[1])
+
+                if (lineInfo[2] == 'D'):
+                    nota.resumoFinanceiro.custosOperacionais.outros *= -1
+            elif ('Outros' in lines[i]):
                 lineInfo = lines[i].split()
                 nota.resumoFinanceiro.custosOperacionais.outros = strToFloat(
                     lineInfo[1])

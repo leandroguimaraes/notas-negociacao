@@ -22,6 +22,8 @@ class ResumoFinanceiroCustosOperacionais:
     impostos: float
     irrfSOperacoesBase: float
     irrfSOperacoes: float
+    irrfDayTradeBase: float
+    irrfDayTradeProjecao: float
     outros: float
     totalCustosDespesas: float
 
