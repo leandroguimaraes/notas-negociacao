@@ -187,8 +187,9 @@ class NotaNegociacao:
                     lines[i][lines[i].rfind(' ') + 1:]) * -1
 
             if ('Impostos' in lines[i]):
+                lineInfo = lines[i].split()
                 nota.resumoFinanceiro.custosOperacionais.impostos = strToFloat(
-                    lines[i][lines[i].rfind(' ') + 1:]) * -1
+                    lineInfo[1]) * -1
 
             if ('I.R.R.F. s/ operações' in lines[i]):
                 lineInfo = lines[i][lines[i].find('R$') + 2:].split()
@@ -198,8 +199,7 @@ class NotaNegociacao:
                 nota.resumoFinanceiro.custosOperacionais.irrfSOperacoes = strToFloat(
                     lineInfo[1])
 
-                if (lineInfo[2] == 'D'):
-                    nota.resumoFinanceiro.custosOperacionais.irrfSOperacoes *= -1
+                nota.resumoFinanceiro.custosOperacionais.irrfSOperacoes *= -1
 
             if ('Outros' in lines[i]):
                 lineInfo = lines[i].split()
