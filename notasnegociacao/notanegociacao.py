@@ -54,6 +54,14 @@ class NotaNegociacao:
 
                     i += 1
 
+                # verifica se a listagem de operações continua em outra folha
+                j = i
+                while ('Total Bovespa' not in lines[j]):
+                    j += 1
+
+                if ('CONTINUA' in lines[j]):
+                    break
+
             i += 1
 
         return notas
