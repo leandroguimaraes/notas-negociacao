@@ -62,6 +62,178 @@ class NotaNegociacao:
                 if ('CONTINUA' in lines[j]):
                     break
 
+            if ('Clearing' in lines[i]):
+                nota.resumoNegocios.debentures = strToFloat(lines[i][lines[i].find(
+                    ' ') + 1:lines[i].rfind(' ')])
+
+            if ('Vendas à vista' in lines[i]):
+                lines[i] = lines[i].replace('Vendas à vista ', '')
+                nota.resumoNegocios.vendasVista = strToFloat(
+                    lines[i][:lines[i].find(' ')])
+
+                creditoDebito = lines[i][-1:]
+                lines[i] = lines[i][:lines[i].rfind(' ')]
+                nota.resumoFinanceiro.clearing.valorLiquidoOperacoes = strToFloat(
+                    lines[i][lines[i].rfind(' ') + 1:])
+
+                if (creditoDebito == 'D'):
+                    nota.resumoFinanceiro.clearing.valorLiquidoOperacoes *= -1
+
+            if ('Compras à vista' in lines[i]):
+                lines[i] = lines[i].replace('Compras à vista ', '')
+                nota.resumoNegocios.comprasVista = strToFloat(
+                    lines[i][:lines[i].find(' ')])
+
+                creditoDebito = lines[i][-1:]
+                lines[i] = lines[i][:lines[i].rfind(' ')]
+                nota.resumoFinanceiro.clearing.taxaLiquidacao = strToFloat(
+                    lines[i][lines[i].rfind(' ') + 1:])
+
+                if (creditoDebito == 'D'):
+                    nota.resumoFinanceiro.clearing.taxaLiquidacao *= -1
+
+            if ('Opções - compras' in lines[i]):
+                lines[i] = lines[i].replace('Opções - compras ', '')
+                nota.resumoNegocios.opcoesCompras = strToFloat(
+                    lines[i][:lines[i].find(' ')])
+
+                creditoDebito = lines[i][-1:]
+                lines[i] = lines[i][:lines[i].rfind(' ')]
+                nota.resumoFinanceiro.clearing.taxaRegistro = strToFloat(
+                    lines[i][lines[i].rfind(' ') + 1:])
+
+                if (creditoDebito == 'D'):
+                    nota.resumoFinanceiro.clearing.taxaRegistro *= -1
+
+            if ('Opções - vendas' in lines[i]):
+                lines[i] = lines[i].replace('Opções - vendas ', '')
+                nota.resumoNegocios.opcoesVendas = strToFloat(
+                    lines[i][:lines[i].find(' ')])
+
+                creditoDebito = lines[i][-1:]
+                lines[i] = lines[i][:lines[i].rfind(' ')]
+                nota.resumoFinanceiro.clearing.totalCBLC = strToFloat(
+                    lines[i][lines[i].rfind(' ') + 1:])
+
+                if (creditoDebito == 'D'):
+                    nota.resumoFinanceiro.clearing.totalCBLC *= -1
+
+            if ('Operações à termo' in lines[i]):
+                lines[i] = lines[i].replace('Operações à termo ', '')
+                nota.resumoNegocios.operacoesTermo = strToFloat(
+                    lines[i][:lines[i].find(' ')])
+
+            if ('Valor das oper. c/ títulos públ. (v. nom.)' in lines[i]):
+                lines[i] = lines[i].replace(
+                    'Valor das oper. c/ títulos públ. (v. nom.) ', '')
+                nota.resumoNegocios.valorOperacoesTitulosPublicosVNom = strToFloat(
+                    lines[i][:lines[i].find(' ')])
+
+                creditoDebito = lines[i][-1:]
+                lines[i] = lines[i][:lines[i].rfind(' ')]
+                nota.resumoFinanceiro.bolsa.taxaTermoOpcoes = strToFloat(
+                    lines[i][lines[i].rfind(' ') + 1:])
+
+                if (creditoDebito == 'D'):
+                    nota.resumoFinanceiro.bolsa.taxaTermoOpcoes *= -1
+
+            if ('Valor das operações' in lines[i]):
+                lines[i] = lines[i].replace(
+                    'Valor das operações ', '')
+                nota.resumoNegocios.valorOperacoes = strToFloat(
+                    lines[i][:lines[i].find(' ')])
+
+                creditoDebito = lines[i][-1:]
+                lines[i] = lines[i][:lines[i].rfind(' ')]
+                nota.resumoFinanceiro.bolsa.taxaANA = strToFloat(
+                    lines[i][lines[i].rfind(' ') + 1:])
+
+                if (creditoDebito == 'D'):
+                    nota.resumoFinanceiro.bolsa.taxaANA *= -1
+
+            if ('Emolumentos' in lines[i]):
+                creditoDebito = lines[i][-1:]
+                lines[i] = lines[i][:lines[i].rfind(' ')]
+                nota.resumoFinanceiro.bolsa.emolumentos = strToFloat(
+                    lines[i][lines[i].rfind(' ') + 1:])
+
+                if (creditoDebito == 'D'):
+                    nota.resumoFinanceiro.bolsa.emolumentos *= -1
+
+            if ('Total Bovespa / Soma' in lines[i]):
+                creditoDebito = lines[i][-1:]
+                lines[i] = lines[i][:lines[i].rfind(' ')]
+                nota.resumoFinanceiro.bolsa.totalBovespaSoma = strToFloat(
+                    lines[i][lines[i].rfind(' ') + 1:])
+
+                if (creditoDebito == 'D'):
+                    nota.resumoFinanceiro.bolsa.totalBovespaSoma *= -1
+
+            if ('Taxa Operacional' in lines[i]):
+                creditoDebito = lines[i][-1:]
+                lines[i] = lines[i][:lines[i].rfind(' ')]
+                nota.resumoFinanceiro.custosOperacionais.taxaOperacional = strToFloat(
+                    lines[i][lines[i].rfind(' ') + 1:])
+
+                if (creditoDebito == 'D'):
+                    nota.resumoFinanceiro.custosOperacionais.taxaOperacional *= -1
+
+            if ('Execução' in lines[i]):
+                nota.resumoFinanceiro.custosOperacionais.execucao = strToFloat(
+                    lines[i][lines[i].rfind(' ') + 1:]) * -1
+
+            if ('Taxa de Custódia' in lines[i]):
+                nota.resumoFinanceiro.custosOperacionais.taxaCustodia = strToFloat(
+                    lines[i][lines[i].rfind(' ') + 1:]) * -1
+
+            if ('Impostos' in lines[i]):
+                nota.resumoFinanceiro.custosOperacionais.impostos = strToFloat(
+                    lines[i][lines[i].rfind(' ') + 1:]) * -1
+
+            if ('I.R.R.F. s/ operações' in lines[i]):
+                lineInfo = lines[i][lines[i].find('R$') + 2:].split()
+                nota.resumoFinanceiro.custosOperacionais.irrfSOperacoesBase = strToFloat(
+                    lineInfo[0])
+
+                nota.resumoFinanceiro.custosOperacionais.irrfSOperacoes = strToFloat(
+                    lineInfo[1])
+
+                if (lineInfo[2] == 'D'):
+                    nota.resumoFinanceiro.custosOperacionais.irrfSOperacoes *= -1
+
+            if ('Outros' in lines[i]):
+                lineInfo = lines[i].split()
+                nota.resumoFinanceiro.custosOperacionais.outros = strToFloat(
+                    lineInfo[1])
+
+                if (lineInfo[2] == 'D'):
+                    nota.resumoFinanceiro.custosOperacionais.outros *= -1
+
+            if ('Total Custos / Despesas' in lines[i]):
+                creditoDebito = lines[i][-1:]
+                lines[i] = lines[i][:lines[i].rfind(' ')]
+                lines[i] = lines[i][lines[i].rfind(' ') + 1:]
+                nota.resumoFinanceiro.custosOperacionais.totalCustosDespesas = strToFloat(
+                    lines[i])
+
+                if (creditoDebito == 'D'):
+                    nota.resumoFinanceiro.custosOperacionais.totalCustosDespesas *= -1
+
+            if ('Líquido para' in lines[i]):
+                creditoDebito = lines[i][-1:]
+                lines[i] = lines[i][:lines[i].rfind(' ')]
+                lines[i] = lines[i][lines[i].find('/') - 2:]
+
+                lineInfo = lines[i].split()
+                nota.resumoFinanceiro.liquidoParaData = datetime.datetime.strptime(
+                    lineInfo[0], '%d/%m/%Y').date()
+
+                nota.resumoFinanceiro.liquidoParaDataValor = strToFloat(
+                    lineInfo[1])
+
+                if (creditoDebito == 'D'):
+                    nota.resumoFinanceiro.liquidoParaDataValor *= -1
+
             i += 1
 
         return notas

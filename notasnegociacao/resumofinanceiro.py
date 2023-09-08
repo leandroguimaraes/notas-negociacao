@@ -24,14 +24,14 @@ class ResumoFinanceiroCustosOperacionais:
     irrfSOperacoes: float
     outros: float
     totalCustosDespesas: float
-    liquidoParaData: datetime.date
-    liquidoParaDataValor: float
 
 
 class ResumoFinanceiro:
     clearing: ResumoFinanceiroClearing
     bolsa: ResumoFinanceiroBolsa
     custosOperacionais: ResumoFinanceiroCustosOperacionais
+    liquidoParaData: datetime.date
+    liquidoParaDataValor: float
 
     def __init__(self):
         self.clearing = ResumoFinanceiroClearing()
