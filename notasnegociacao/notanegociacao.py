@@ -48,7 +48,7 @@ class NotaNegociacao:
             if (lines[i] == 'Negócios realizados'):
                 i += 2
 
-                while (lines[i].find('Resumo dos Negócios') == -1):
+                while ('Resumo dos Negócios' not in lines[i]):
                     notas.append(NotaNegociacao.getNegocioInfo(
                         lines[i], folhaAtual))
 
