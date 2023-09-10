@@ -10,9 +10,6 @@ class Corretora:
             self.lerNotasDiretorio(dir)
 
     def lerNotasDiretorio(self, dir: str):
-        return self.lerNotasDiretorio(dir)
-
-    def lerNotasDiretorio(self, dir: str):
         result: List[NotaNegociacao] = []
 
         notasPdf = [f for f in os.listdir(dir) if f.endswith('.pdf')]
