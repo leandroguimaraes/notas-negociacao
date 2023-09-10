@@ -9,7 +9,7 @@ class Corretora:
         if (dir != None):
             self.lerNotasDiretorio(dir)
 
-    def lerNotasDiretorio(self, dir: str):
+    def lerNotasDiretorio(self, dir: str) -> List[NotaNegociacao]:
         result: List[NotaNegociacao] = []
 
         notasPdf = [f for f in os.listdir(dir) if f.endswith('.pdf')]

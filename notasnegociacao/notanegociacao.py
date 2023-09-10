@@ -22,7 +22,7 @@ class NotaNegociacao:
         self.resumoFinanceiro = ResumoFinanceiro()
 
     @staticmethod
-    def parseText(text: str, notas=[]):
+    def parseText(text: str, notas: List['NotaNegociacao'] = []) -> List['NotaNegociacao']:
         nota: NotaNegociacao = None
         folhaAtual = 0
 
@@ -255,7 +255,7 @@ class NotaNegociacao:
         return notas
 
     @staticmethod
-    def getNegocioInfo(line: str, folha: int):
+    def getNegocioInfo(line: str, folha: int) -> NegocioRealizado:
         n = NegocioRealizado()
         n.folha = folha
 
