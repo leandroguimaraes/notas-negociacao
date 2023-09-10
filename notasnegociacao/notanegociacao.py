@@ -250,6 +250,8 @@ class NotaNegociacao:
                 if (creditoDebito == 'D'):
                     nota.resumoFinanceiro.liquidoParaDataValor *= -1
 
+                NotaNegociacao.calcResumoFinanceiroNegocio(nota)
+
             i += 1
 
         return notas
@@ -297,3 +299,45 @@ class NotaNegociacao:
         n.especificacaoTitulo = line
 
         return n
+
+    @staticmethod
+    def calcResumoFinanceiroNegocio(nota: 'NotaNegociacao'):
+        valorLiquidoOperacoes = nota.resumoFinanceiro.clearing.valorLiquidoOperacoes
+        for negocio in nota.negociosRealizados:
+            perc = abs(negocio.valorOperacaoAjuste / valorLiquidoOperacoes)
+
+            negocio.resumoFinanceiro.clearing.taxaLiquidacao = nota.resumoFinanceiro.clearing.taxaLiquidacao * perc
+            negocio.resumoFinanceiro.clearing.taxaRegistro = nota.resumoFinanceiro.clearing.taxaRegistro * perc
+            negocio.resumoFinanceiro.clearing.totalCBLC = \
+                negocio.valorOperacaoAjuste - \
+                negocio.resumoFinanceiro.clearing.taxaLiquidacao - \
+                negocio.resumoFinanceiro.clearing.taxaRegistro
+
+            negocio.resumoFinanceiro.bolsa.taxaTermoOpcoes = nota.resumoFinanceiro.bolsa.taxaTermoOpcoes * perc
+            negocio.resumoFinanceiro.bolsa.taxaANA = nota.resumoFinanceiro.bolsa.taxaANA * perc
+            negocio.resumoFinanceiro.bolsa.emolumentos = nota.resumoFinanceiro.bolsa.emolumentos * perc
+            negocio.resumoFinanceiro.bolsa.totalBovespaSoma = \
+                negocio.resumoFinanceiro.bolsa.taxaTermoOpcoes + \
+                negocio.resumoFinanceiro.bolsa.taxaANA + \
+                negocio.resumoFinanceiro.bolsa.emolumentos
+
+            negocio.resumoFinanceiro.custosOperacionais.taxaOperacional = nota.resumoFinanceiro.custosOperacionais.taxaOperacional * perc
+            negocio.resumoFinanceiro.custosOperacionais.execucao = nota.resumoFinanceiro.custosOperacionais.execucao * perc
+            negocio.resumoFinanceiro.custosOperacionais.taxaCustodia = nota.resumoFinanceiro.custosOperacionais.taxaCustodia * perc
+            negocio.resumoFinanceiro.custosOperacionais.impostos = nota.resumoFinanceiro.custosOperacionais.impostos * perc
+            negocio.resumoFinanceiro.custosOperacionais.outros = nota.resumoFinanceiro.custosOperacionais.outros * perc
+
+            negocio.resumoFinanceiro.custosOperacionais.totalCustosDespesas = \
+                negocio.resumoFinanceiro.custosOperacionais.taxaOperacional + \
+                negocio.resumoFinanceiro.custosOperacionais.execucao + \
+                negocio.resumoFinanceiro.custosOperacionais.taxaCustodia + \
+                negocio.resumoFinanceiro.custosOperacionais.impostos + \
+                negocio.resumoFinanceiro.custosOperacionais.outros
+
+            if hasattr(nota.resumoFinanceiro.custosOperacionais, 'irrfDayTradeProjecao'):
+                negocio.resumoFinanceiro.custosOperacionais.irrfDayTradeProjecao = nota.resumoFinanceiro.custosOperacionais.irrfDayTradeProjecao * perc
+                negocio.resumoFinanceiro.custosOperacionais.totalCustosDespesas += negocio.resumoFinanceiro.custosOperacionais.irrfDayTradeProjecao
+
+            if hasattr(nota.resumoFinanceiro.custosOperacionais, 'irrfSOperacoes'):
+                negocio.resumoFinanceiro.custosOperacionais.irrfSOperacoes = nota.resumoFinanceiro.custosOperacionais.irrfSOperacoes * perc
+                negocio.resumoFinanceiro.custosOperacionais.totalCustosDespesas += negocio.resumoFinanceiro.custosOperacionais.irrfSOperacoes

@@ -1,3 +1,6 @@
+from notasnegociacao.resumofinanceiro import ResumoFinanceiro
+
+
 class NegocioRealizado:
     folha: int
     negociacao: str
@@ -10,3 +13,7 @@ class NegocioRealizado:
     precoAjuste: float
     valorOperacaoAjuste: float
     debitoCredito: str
+    resumoFinanceiro: ResumoFinanceiro
+
+    def __init__(self):
+        self.resumoFinanceiro = ResumoFinanceiro()
