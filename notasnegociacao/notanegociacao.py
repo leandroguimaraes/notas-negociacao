@@ -271,6 +271,9 @@ class NotaNegociacao:
         n.valorOperacaoAjuste = strToFloat(line[line.rfind(' ') + 1:])
         line = line[:line.rfind(' ')]
 
+        if (n.debitoCredito == 'D'):
+            n.valorOperacaoAjuste *= -1
+
         n.precoAjuste = strToFloat(line[line.rfind(' ') + 1:])
         line = line[:line.rfind(' ')]
 
