@@ -8,4 +8,7 @@ setup(
     author='Leandro Martins Guimarães',
     url='https://github.com/leandroguimaraes/notas-negociacao',
     packages=find_packages(),
+    extras_require = {
+       'build': ['pdfplumber']
+   }
 )
