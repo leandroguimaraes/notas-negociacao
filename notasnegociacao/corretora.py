@@ -5,9 +5,11 @@ import pdfplumber
 
 
 class Corretora:
+    notasNegociacao: List[NotaNegociacao]
+
     def __init__(self, dir: str = None):
         if (dir != None):
-            self.lerNotasDiretorio(dir)
+            self.notasNegociacao = self.lerNotasDiretorio(dir)
 
     def lerNotasDiretorio(self, dir: str) -> List[NotaNegociacao]:
         result: List[NotaNegociacao] = []
