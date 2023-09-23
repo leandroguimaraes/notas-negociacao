@@ -14,6 +14,24 @@ class NotaNegociacao:
     resumoNegocios: ResumoNegocios
     resumoFinanceiro: ResumoFinanceiro
 
+    OBS = [
+        '2',  # Corretora ou pessoa vinculada atuou na contra parte
+        '#',  # Negócio direto
+        '8',  # Liquidação Institucional
+        'D',  # Day Trade
+        'F',  # Cobertura
+        'B',  # Debêntures
+        'A',  # Posição futuro
+        'C',  # Clubes e fundos de Ações
+        'P',  # Carteira Própria
+        'H',  # Home Broker
+        'X',  # Box
+        'Y',  # Desmanche de Box
+        'L',  # Precatório
+        'T',  # Liquidação pelo Bruto
+        'I',  # POP
+    ]
+
     def __init__(self, numero: str = None):
         self.numero = numero
 
@@ -282,9 +300,16 @@ class NotaNegociacao:
         n.quantidade = strToInt(line[line.rfind(' ') + 1:])
         line = line[:line.rfind(' ')]
 
-        if (line[-2:-1] == ' '):
-            n.obs = line[-1:]
-            line = line[:line.rfind(' ')]
+        obs = ''
+        obsLine = line
+        while (obsLine[-1:] != ' ' and obsLine[-1:] in NotaNegociacao.OBS):
+            obs = obsLine[-1:] + obs
+            obsLine = obsLine[:-1]
+            if (obsLine[-1:] == ' '):
+                line = obsLine[:-1]
+
+        if (obsLine[-1:] == ' '):
+            n.obs = obs
 
         if (line[:5] == 'VISTA'):
             n.tipoMercado = line[:5]
