@@ -292,6 +292,7 @@ class NotaNegociacao:
 
             # algumas notas possuem "Prazo" para vendas à vista
             # o que é um erro e deve ser tratado
+            # para estes casos, o "Prazo" é descartado aqui
             if (line[2:3] == '/' and line[5:6] == ' '):
                 line = line[6:]
         else:
