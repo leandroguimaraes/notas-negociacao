@@ -289,6 +289,11 @@ class NotaNegociacao:
         if (line[:5] == 'VISTA'):
             n.tipoMercado = line[:5]
             line = line[6:]
+
+            # algumas notas possuem "Prazo" para vendas à vista
+            # o que é um erro e deve ser tratado
+            if (line[2:3] == '/' and line[5:6] == ' '):
+                line = line[6:]
         else:
             n.tipoMercado = line[:line.find('/') - 3]
             line = line[line.find('/') - 2:]
