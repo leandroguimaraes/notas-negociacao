@@ -3,14 +3,13 @@ from notasnegociacao.negociorealizado import NegocioRealizado
 from notasnegociacao.resumofinanceiro import ResumoFinanceiro
 from notasnegociacao.resumonegocios import ResumoNegocios
 from notasnegociacao.util import strToFloat, strToInt
-from typing import List
 import datetime
 
 
 class NotaNegociacao:
     numero: str
     dataPregao: datetime.date
-    negociosRealizados: List[NegocioRealizado]
+    negociosRealizados: list[NegocioRealizado]
     resumoNegocios: ResumoNegocios
     resumoFinanceiro: ResumoFinanceiro
 
@@ -40,7 +39,7 @@ class NotaNegociacao:
         self.resumoFinanceiro = ResumoFinanceiro()
 
     @staticmethod
-    def parseText(text: str, notas: List['NotaNegociacao'] = []) -> List['NotaNegociacao']:
+    def parseText(text: str, notas: list['NotaNegociacao'] = []) -> list['NotaNegociacao']:
         nota: NotaNegociacao = None
         folhaAtual = 0
 

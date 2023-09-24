@@ -1,18 +1,17 @@
 from notasnegociacao.notanegociacao import NotaNegociacao
-from typing import List
 import os
 import pdfplumber
 
 
 class Corretora:
-    notasNegociacao: List[NotaNegociacao]
+    notasNegociacao: list[NotaNegociacao]
 
     def __init__(self, dir: str = None):
         if (dir != None):
             self.notasNegociacao = self.lerNotasDiretorio(dir)
 
-    def lerNotasDiretorio(self, dir: str) -> List[NotaNegociacao]:
-        result: List[NotaNegociacao] = []
+    def lerNotasDiretorio(self, dir: str) -> list[NotaNegociacao]:
+        result: list[NotaNegociacao] = []
 
         notasPdf = [f for f in os.listdir(dir) if f.endswith('.pdf')]
 
