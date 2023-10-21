@@ -26,4 +26,4 @@ class Corretora:
                     result = NotaNegociacao.parseText(
                         page.extract_text(), result)
 
-        return result
+        return sorted(result, key=lambda r: r.dataPregao)
