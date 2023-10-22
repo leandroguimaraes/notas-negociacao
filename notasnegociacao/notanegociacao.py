@@ -339,8 +339,8 @@ class NotaNegociacao:
             negocio.resumoFinanceiro.clearing.taxaLiquidacao = nota.resumoFinanceiro.clearing.taxaLiquidacao * perc
             negocio.resumoFinanceiro.clearing.taxaRegistro = nota.resumoFinanceiro.clearing.taxaRegistro * perc
             negocio.resumoFinanceiro.clearing.totalCBLC = \
-                negocio.valorOperacaoAjuste - \
-                negocio.resumoFinanceiro.clearing.taxaLiquidacao - \
+                negocio.valorOperacaoAjuste + \
+                negocio.resumoFinanceiro.clearing.taxaLiquidacao + \
                 negocio.resumoFinanceiro.clearing.taxaRegistro
 
             negocio.resumoFinanceiro.bolsa.taxaTermoOpcoes = nota.resumoFinanceiro.bolsa.taxaTermoOpcoes * perc
