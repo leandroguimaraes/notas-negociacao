@@ -334,7 +334,8 @@ class NotaNegociacao:
     def calcResumoFinanceiroNegocio(nota: 'NotaNegociacao'):
         valorLiquidoOperacoes = nota.resumoFinanceiro.clearing.valorLiquidoOperacoes
         for negocio in nota.negociosRealizados:
-            perc = abs(negocio.valorOperacaoAjuste / valorLiquidoOperacoes)
+            perc = abs((negocio.valorOperacaoAjuste /
+                       valorLiquidoOperacoes) / 100)
 
             negocio.resumoFinanceiro.clearing.taxaLiquidacao = nota.resumoFinanceiro.clearing.taxaLiquidacao * perc
             negocio.resumoFinanceiro.clearing.taxaRegistro = nota.resumoFinanceiro.clearing.taxaRegistro * perc
