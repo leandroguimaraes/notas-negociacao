@@ -332,10 +332,10 @@ class NotaNegociacao:
 
     @staticmethod
     def calcResumoFinanceiroNegocio(nota: 'NotaNegociacao'):
-        valorLiquidoOperacoes = nota.resumoFinanceiro.clearing.valorLiquidoOperacoes
+        valorOperacoes = nota.resumoNegocios.valorOperacoes
         for negocio in nota.negociosRealizados:
-            perc = abs((negocio.valorOperacaoAjuste /
-                       valorLiquidoOperacoes) / 100)
+            perc = abs(negocio.valorOperacaoAjuste /
+                       valorOperacoes)
 
             negocio.resumoFinanceiro.clearing.taxaLiquidacao = nota.resumoFinanceiro.clearing.taxaLiquidacao * perc
             negocio.resumoFinanceiro.clearing.taxaRegistro = nota.resumoFinanceiro.clearing.taxaRegistro * perc
