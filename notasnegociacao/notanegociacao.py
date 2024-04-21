@@ -66,7 +66,7 @@ class NotaNegociacao:
                 i += 2
 
                 while ('Resumo dos Negócios' not in lines[i]):
-                    nota.negociosRealizados.append(NotaNegociacao.getNegocioInfo(
+                    nota.negociosRealizados.append(NotaNegociacao.__getNegocioInfo(
                         lines[i], folhaAtual))
 
                     i += 1
@@ -272,7 +272,7 @@ class NotaNegociacao:
         return notas
 
     @staticmethod
-    def getNegocioInfo(line: str, folha: int) -> NegocioRealizado:
+    def __getNegocioInfo(line: str, folha: int) -> NegocioRealizado:
         n = NegocioRealizado()
         n.folha = folha
 
